@@ -20,6 +20,8 @@ http.createServer((req, res) => {
 
         // Handle home page
         if (req.url === "/") {
+            res.write("<h1>My Family</h1>")
+            res.write("<p>This is a webpage about my family </p>")
             res.write("<a style='margin-right: 16px' href='/children'>My Children</a>");
             res.write("<a style='margin-right: 16px' href='/parents'>My Parents</a>");
             return res.end();
@@ -30,6 +32,7 @@ http.createServer((req, res) => {
             res.write("<h1>My darling children</h1>");
             res.write("<div><p>I have two beautiful kids</p></div>");
             res.write("<a style='margin-right: 16px' href='/'>Home</a>");
+            res.write("<a style='margin-right: 16px' href='/parents'>My Parents</a>");
             res.write("<div>To read more about my kids, please click on a link below:</div>");
             res.write("<a style='margin-right: 16px' href='/children?name=areeba'>My daughter Areeba</a>");
             res.write("<a style='margin-right: 16px' href='/children?name=fatima'>My daughter Fatima</a>");
