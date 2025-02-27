@@ -26,6 +26,16 @@ http.createServer((req, res) => {
             res.write("<a style='margin-right: 16px' href='/parents'>My Parents</a>");
             return res.end();
         }
+        
+         // Handle parents page
+        if (fullPath.pathname === "/parents") {
+            res.write("<h1>My Loving Parents</h1>");
+            res.write("<p>They are the best and have always supported me.</p>");
+            res.write("<a style='margin-right: 16px' href='/'>Home</a>");
+            res.write("<a style='margin-right: 16px' href='/children'>My Children</a>");
+            return res.end();
+        }
+        
 
         // Handle children page
         if (fullPath.pathname === "/children") {
@@ -45,9 +55,15 @@ http.createServer((req, res) => {
                     } else {
                         res.write("<div>" + data + "</div>");
                     }
-                    res.end(); 
+            
+                    // Check for the 'age' query parameter
+                    if (queries.age) {
+                        res.write(`<p>Areeba is ${queries.age} years old!</p>`);
+                    }
+            
+                    res.end();
                 });
-                return; 
+                return;
             }
 
             // Handle Fatima details
