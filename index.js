@@ -20,16 +20,29 @@ http.createServer((req, res) => {
 
         // Handle home page
         if (req.url === "/") {
+            res.write("<h1>My Family</h1>")
+            res.write("<p>This is a webpage about my family </p>")
             res.write("<a style='margin-right: 16px' href='/children'>My Children</a>");
             res.write("<a style='margin-right: 16px' href='/parents'>My Parents</a>");
             return res.end();
         }
+        
+         // Handle parents page
+        if (fullPath.pathname === "/parents") {
+            res.write("<h1>My Loving Parents</h1>");
+            res.write("<p>They are the best and have always supported me.</p>");
+            res.write("<a style='margin-right: 16px' href='/'>Home</a>");
+            res.write("<a style='margin-right: 16px' href='/children'>My Children</a>");
+            return res.end();
+        }
+        
 
         // Handle children page
         if (fullPath.pathname === "/children") {
             res.write("<h1>My darling children</h1>");
             res.write("<div><p>I have two beautiful kids</p></div>");
             res.write("<a style='margin-right: 16px' href='/'>Home</a>");
+            res.write("<a style='margin-right: 16px' href='/parents'>My Parents</a>");
             res.write("<div>To read more about my kids, please click on a link below:</div>");
             res.write("<a style='margin-right: 16px' href='/children?name=areeba'>My daughter Areeba</a>");
             res.write("<a style='margin-right: 16px' href='/children?name=fatima'>My daughter Fatima</a>");
@@ -42,9 +55,15 @@ http.createServer((req, res) => {
                     } else {
                         res.write("<div>" + data + "</div>");
                     }
-                    res.end(); 
+            
+                    // Check for the 'age' query parameter
+                    if (queries.age) {
+                        res.write(`<p>Areeba is ${queries.age} years old!</p>`);
+                    }
+            
+                    res.end();
                 });
-                return; 
+                return;
             }
 
             // Handle Fatima details
